@@ -15,7 +15,7 @@ let cardId = 0
 
 const clearValuePanel = () => {
 	textarea.value = ''
-	category.value = 0 //selectedIndex
+	category.value = 0 
 }
 
 const openPanel = () => {
@@ -30,7 +30,6 @@ const closePanel = () => {
 
 const addNote = () => {
 	if (textarea.value !== '' && category.value !== '0') {
-		//category.options[category.selectedIndex]
 		error.style.visibility = 'hidden'
 		createNote()
 	} else {
@@ -77,16 +76,6 @@ const checkColor = note => {
 			note.style.backgroundColor = 'rgb(0,170,255)'
 			break
 	}
-
-	// if(selectValue === 'Zakupy'){
-	//     note.style.backgroundColor = 'rgb(72,255,0)'
-	// }
-	// else if(selectValue == 'Praca'){
-	//     note.style.backgroundColor = 'rgb(255,243,0)'
-	// }
-	// else if(selectValue == 'Inne'){
-	//     note.style.backgroundColor = 'rgb(0,170,255)'
-	// }
 }
 
 const deleteNote = id => {
