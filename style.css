@@ -134,6 +134,9 @@ body {
 		margin-top: 10px;
 		display: flex;
 	}
+	.note-area{
+		justify-content: center;
+	}
 
 	.note {
 		margin: 40px 20px 0 20px;
