@@ -1,1 +1,68 @@
-# In the process of building...
+<a name="readme-top"></a>
+
+# Notes
+
+<!-- TABLE OF CONTENTS -->
+<div align="center">
+  <a href="#project-description">Project description</a> •
+  <a href="#technologies-used">Technologies Used</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#live-demo">Live Demo</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#credits">Credits</a> •
+</div>
+
+<br>
+
+## Project description
+
+![Site screenshot][product-screenshot] <br>
+
+Notes is a page where you can save your notes. 
+The design is made based on the course, but I added Local Storage and improved the look on phones
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Technologies Used
+
+This website was built using the following technologies:
+
+- ![HTML][html-img]
+- ![CSS][css-img]
+- ![JavaScript][js-img]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Usage:
+
+- To add a new note, click on the "Dodaj" button at the top of the screen. 
+Enter the title and content of the note, then click "Zapisz" <br>
+- To delete a note, click on the "X". <br>
+- To delete all notes, click on the "Usuń wszystko" button. <br>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Live Demo
+
+To see the live demo of this website, please visit: https://notes-rudydev.netlify.app
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Contributing
+
+If you'd like to contribute to Stoper please fork the repository and make your changes in a new branch. Once you're done, submit a pull request and we'll review your changes.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Credits
+
+Stoper was developed by RudyGamesv2.
+This site is based on a project from the course
+Link: https://www.udemy.com/course/10-projektow-w-czystym-javascript-cz-1/
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+[product-screenshot]: screen.png
+[html-img]: https://img.shields.io/badge/-HTML-E34F26?logo=html5&logoColor=white
+[css-img]: https://img.shields.io/badge/-CSS-1572B6?logo=css3&logoColor=white
+[js-img]: https://img.shields.io/badge/-JS-F7DF1E?logo=javaScript&logoColor=white
