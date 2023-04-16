@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
-# Notes
-
+# MyNotes
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e0c94fda-4a74-4476-bc46-fd077bfa4407/deploy-status)](https://app.netlify.com/sites/notes-rudydev/deploys)
 <!-- TABLE OF CONTENTS -->
 <div align="center">
   <a href="#project-description">Project description</a> •
@@ -18,7 +18,7 @@
 
 ![Site screenshot][product-screenshot] <br>
 
-Notes is a page where you can save your notes. 
+MyNotes is a page where you can save your notes. 
 The design is made based on the course, but I added Local Storage and improved the look on phones
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -50,13 +50,13 @@ To see the live demo of this website, please visit: https://notes-rudydev.netlif
 
 ## Contributing
 
-If you'd like to contribute to Stoper please fork the repository and make your changes in a new branch. Once you're done, submit a pull request and we'll review your changes.
+If you'd like to contribute to MyNotes please fork the repository and make your changes in a new branch. Once you're done, submit a pull request and we'll review your changes.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Credits
 
-Stoper was developed by RudyGamesv2.
+MyNotes was developed by RudyGamesv2.
 This site is based on a project from the course
 Link: https://www.udemy.com/course/10-projektow-w-czystym-javascript-cz-1/
 
