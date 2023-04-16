@@ -75,8 +75,8 @@ body {
 }
 
 .note-body {
-	/* ciekawe */
-	overflow-wrap: break-word; 
+	/* blokowanie wystających liter */
+	overflow-wrap: break-word;
 	padding: 20px 15px;
 	font-size: 14px;
 }
