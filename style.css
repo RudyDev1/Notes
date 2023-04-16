@@ -91,7 +91,8 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 40px 0;
-	width: 600px;
+	max-width: 600px;
+	width: 100%;
 	background-color: #fff;
 	box-shadow: 0 0 10px black;
 	border-radius: 5px;
@@ -123,4 +124,18 @@ body {
 	margin-bottom: 20px;
 	color: red;
 	visibility: hidden;
+}
+
+@media (max-width: 576px) {
+	.menu {
+		flex-direction: column;
+	}
+	.menu-buttons {
+		margin-top: 10px;
+		display: flex;
+	}
+
+	.note {
+		margin: 40px 20px 0 20px;
+	}
 }
