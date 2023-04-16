@@ -2,7 +2,6 @@ const addBtn = document.querySelector('.add')
 const deleteAllBtn = document.querySelector('.delete-all')
 const saveBtn = document.querySelector('.save')
 const cancelBtn = document.querySelector('.cancel')
-// const deleteBtn = document.getElementsByClassName('delete-note')
 
 const noteArea = document.querySelector('.note-area')
 const notePanel = document.querySelector('.note-panel')
