@@ -13,9 +13,9 @@ const error = document.querySelector('.error')
 let selectedValue
 
 // =========================== local ===========================
-const categoryNoteList = localStorage.getItem('category') ? JSON.parse(localStorage.getItem('category')) : []
-const textNoteList = localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')) : []
-const colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
+let categoryNoteList = localStorage.getItem('category') ? JSON.parse(localStorage.getItem('category')) : []
+let textNoteList = localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')) : []
+let colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
 
 
 const createLocalNote = () => {
@@ -114,16 +114,6 @@ const checkColor = note => {
 	}
 }
 
-// const activateDeleteListeners = () => {
-// 	let deleteBtn = document.querySelectorAll('.delete-note')
-// 	deleteBtn.forEach((dB) => {
-// 		dB.addEventListener('click', deleteNote)
-// 	})
-// 	// deleteBtn.forEach((dB, i) => {
-// 	// 	// dB.addEventListener('click', () => { deleteNote(i) })
-// 	// 	dB.addEventListener('click', deleteNote(i))
-// 	// })
-// }
 
 const activateDeleteListeners = e => {
 	console.log()
@@ -155,6 +145,10 @@ const deleteNote = i => {
 
 const deleteAllNotes = () => {
 	noteArea.textContent = ''
+	categoryNoteList = []
+	textNoteList = []
+	colorNoteList = [] 
+	localStorage.clear()
 }
 
 window.addEventListener('DOMContentLoaded', createLocalNote)
