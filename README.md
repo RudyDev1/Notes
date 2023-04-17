@@ -5,6 +5,7 @@
 <!-- TABLE OF CONTENTS -->
 <div align="center">
   <a href="#project-description">Project description</a> •
+  <a href="#to-do">To do</a> •
   <a href="#technologies-used">Technologies Used</a> •
   <a href="#usage">Usage</a> •
   <a href="#live-demo">Live Demo</a> •
@@ -22,6 +23,18 @@ MyNotes is a page where you can save your notes.
 The design is made based on the course, but I added Local Storage and improved the look on phones
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## To do
+
+- [x] fixed view in mobile
+- [x] Create local storage
+- [ ] Add more categories
+- [ ] Add the ability to enter your own categories
+- [ ] Add the ability to choose your own note color
+- [ ] Add the ability to set the time we have to take a note (in progres)
+- [ ] Add the ability to set a notification when time is running out to take a note (in progres)
+- [ ] Add the ability to add your own background
+- [ ] Add all this news to Local Storage
 
 ## Technologies Used
 
