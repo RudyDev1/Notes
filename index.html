@@ -9,7 +9,7 @@
     <meta name="description" content="Dodawaj i zapisuj swoje notatki. Skorzystaj z darmowej strony już dziś!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;600;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/58309639ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
@@ -23,6 +23,8 @@
         <div class="menu-buttons">
             <button class="add icon"><i class="fas fa-plus"></i> Dodaj</button>
             <button class="delete-all icon"><i class="fas fa-trash-alt"></i> Usuń wszystkie</button>
+            <button class="settings icon desktop"><i class="fa-solid fa-gear"></i> Ustawienia</button>
+            <button class="settings icon mobile"><i class="fa-solid fa-gear"></i></button>
         </div>
     </div>
 
@@ -32,7 +34,7 @@
 
     <div class="note-panel">
         <h2>Dodaj notatke</h2>
-        <label for="category">Wybierz kategorię:</label>
+        <label for="category">Wybierz kategorię: <span>*</span></label>
         <select id="category">
             <option value="0" disabled selected>-wybierz kategorię-</option>
             <option value="1">Zakupy</option>
@@ -40,8 +42,10 @@
             <option value="1">Inne</option>
         </select>
 
-        <label for="text">Wpisz treśc notatki</label>
+        <label for="text">Wpisz treść notatki: <span>*</span></label>
         <textarea id="text"></textarea>
+        <label for="time">Wybierz o której godzinie ma przyjść przypomnienie: </label>
+        <input type="time" id="time"></input>
 
         <p class="error">Uzupełnij wszystkie pola!</p>
         <div class="panel-buttons">

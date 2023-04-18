@@ -10,6 +10,10 @@ body {
 	background-color: rgb(243, 243, 243);
 }
 
+.bold{
+	font-weight: 600;
+}
+
 .menu {
 	display: flex;
 	justify-content: space-between;
@@ -41,6 +45,14 @@ body {
 	margin-right: 10px;
 }
 
+.desktop{
+	display: inline-block;
+}
+
+.mobile{
+	display: none;
+}
+
 .add {
 	margin-right: 20px;
 }
@@ -66,6 +78,7 @@ body {
 	padding: 20px;
 	background-color: rgba(0, 0, 0, 0.06);
 }
+
 
 .note-header .delete-note {
 	background: none;
@@ -96,6 +109,7 @@ body {
 	background-color: #fff;
 	box-shadow: 0 0 10px black;
 	border-radius: 5px;
+	text-align: center;
 }
 
 .note-panel h2 {
@@ -107,8 +121,16 @@ body {
 	margin-bottom: 10px;
 }
 
+.note-panel label span {
+	color: crimson;
+}
+
+.note-panel #text {
+	height: 100px;
+}
+
 .note-panel #text,
-.note-panel #category {
+.note-panel #category{
 	margin-bottom: 20px;
 	padding: 10px 20px;
 	width: 100%;
@@ -118,6 +140,13 @@ body {
 	font-size: 16px;
 	border-radius: 5px;
 	border: 1px solid black;
+}
+
+.note-panel input[type = "time"]{
+	padding: 10px 20px;
+	border-radius: 5px;
+    border: 1px solid black;
+	margin-top: 5px;
 }
 
 .note-panel .error {
@@ -134,11 +163,20 @@ body {
 		margin-top: 10px;
 		display: flex;
 	}
-	.note-area{
+	.note-area {
 		justify-content: center;
+	}
+
+	.desktop{
+		display: none;
+	}
+
+	.mobile{
+		display: inline-block;
 	}
 
 	.note {
 		margin: 40px 20px 0 20px;
 	}
+
 }
