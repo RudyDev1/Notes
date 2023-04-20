@@ -9,8 +9,7 @@
     <meta name="description" content="Dodawaj i zapisuj swoje notatki. Skorzystaj z darmowej strony już dziś!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@200;400;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@200;400;600;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/58309639ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
@@ -19,13 +18,19 @@
 <body>
 
     <div class="menu">
-        <h1><i class="fas fa-sticky-note"></i> MyNotes</h1>
+        <h1>
+            <i class="fas fa-sticky-note"></i> MyNotes</h1>
 
         <div class="menu-buttons">
-            <button class="add icon"><i class="fas fa-plus"></i> Dodaj</button>
-            <button class="delete-all icon"><i class="fas fa-trash-alt"></i> Usuń wszystkie</button>
-            <button class="settings icon desktop"><i class="fa-solid fa-gear"></i> Ustawienia</button>
-            <button class="settings icon mobile"><i class="fa-solid fa-gear"></i></button>
+            <button class="add icon">
+                <i class="fas fa-plus"></i> Dodaj</button>
+            <button class="delete-all icon">
+                <i class="fas fa-trash-alt"></i> Usuń wszystkie</button>
+            <button class="settings icon desktop">
+                <i class="fa-solid fa-gear"></i> Ustawienia</button>
+            <button class="settings icon mobile">
+                <i class="fa-solid fa-gear"></i>
+            </button>
         </div>
     </div>
 
@@ -35,44 +40,56 @@
 
     <div class="note-panel panel">
         <h2>Dodaj notatke</h2>
-        <label for="category">Wybierz kategorię: <span>*</span></label>
+        <label for="category">Wybierz kategorię:
+            <span>*</span>
+        </label>
         <select id="category">
             <option value="0" disabled selected>-wybierz kategorię-</option>
         </select>
 
-        <label for="text">Wpisz treść notatki: <span>*</span></label>
+        <label for="text">Wpisz treść notatki:
+            <span>*</span>
+        </label>
         <textarea id="text"></textarea>
         <label for="time">Wybierz o której godzinie ma przyjść przypomnienie: </label>
         <input type="time" id="time"></input>
 
         <p class="error">Uzupełnij wszystkie pola!</p>
         <div class="panel-buttons">
-            <button class="save icon panel-button"><i class="fas fa-save"></i> Zapisz</button>
-            <button class="cancel icon panel-button"><i class="far fa-window-close"></i> Anuluj</button>
+            <button class="save icon panel-button">
+                <i class="fas fa-save"></i> Zapisz</button>
+            <button class="cancel icon panel-button">
+                <i class="far fa-window-close"></i> Anuluj</button>
         </div>
     </div>
 
     <!-- settings -->
 
     <div class="settings-panel panel">
-        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-settings">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
 
         <h2>Ustawienia</h2>
 
         <h3>Tworzenie kategorii</h3>
-        <button class="category-open-panel-btn panel-button"><i class="fa-solid fa-plus"></i> Zarządzaj
-            kategoriami</button>
+        <button class="category-open-panel-btn panel-button">
+            <i class="fa-solid fa-plus"></i> Zarządzaj kategoriami
+        </button>
 
         <h3>Kolory i tło</h3>
-        <button class="colors-open-panel-btn panel-button"><i class="fa-solid fa-palette"></i> Zarządzaj kolorami i tłem
-            strony</button>
+        <button class="colors-open-panel-btn panel-button">
+            <i class="fa-solid fa-palette"></i> Zarządzaj kolorami i tłem strony
+        </button>
 
         <p class="info">Wersja Beta, mogą występować błędy!</p>
     </div>
 
 
     <div class="category-panel panel">
-        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-settings">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
         <h3>Tworzenie kategorii</h3>
         <div class="category-box">
             <label for="category-add">Wpisz nazwę nowej kategorii: </label>
@@ -85,15 +102,27 @@
         </div>
 
         <p class="error-category">Ta kategoria już istnieje</p>
-        <button class="category-btn panel-button"><i class="fa-solid fa-plus "></i> Dodaj nową kategorię</button>
+        <button class="category-btn panel-button">
+            <i class="fa-solid fa-plus"></i> Dodaj nową kategorię</button>
+
+        <h3>Usuwanie kategori</h3>
+        <label for="category-delete">Wybierz kategorię do usunięcia</label>
+        <select id="category-delete">
+            <!-- <option value="0">test</option> -->
+        </select>
+        <button class="category-delete-btn panel-button">
+            <i class="fa-solid fa-trash"></i> Usuń kategorię</button>
     </div>
 
     <div class="backround-and-colors-panel panel">
-        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-settings">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
         <div class="backround">
             <h3>Dodawanie tła</h3>
             <input type="url" placeholder="https://example.com" size="30" id="bg-add-input">
-            <button class="bg-add-btn panel-button"><i class="fa-solid fa-image"></i> Ustaw swoje tło</button>
+            <button class="bg-add-btn panel-button">
+                <i class="fa-solid fa-image"></i> Ustaw swoje tło</button>
         </div>
 
         <div class="color">
@@ -115,9 +144,11 @@
                 </div>
             </div>
             <div>
-                <button class="c-add-btn panel-button"><i class="fa-solid fa-palette"></i> Ustaw kolory strony</button>
-                <button class="c-reset-btn panel-button"><i class="fa-solid fa-arrow-rotate-left"></i> Reset
-                    kolorów</button>
+                <button class="c-add-btn panel-button">
+                    <i class="fa-solid fa-palette"></i> Ustaw kolory strony</button>
+                <button class="c-reset-btn panel-button">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Reset kolorów
+                </button>
             </div>
 
         </div>

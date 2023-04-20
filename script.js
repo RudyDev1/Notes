@@ -20,6 +20,8 @@ const categoryInput = document.querySelector('#category-add')
 const categoryColor = document.querySelector('#category-color-add')
 const categoryBtn = document.querySelector('.category-btn')
 const categoryError = document.querySelector('.error-category')
+const categoryDeleteBtn = document.querySelector('.category-delete-btn')
+const categoryToDelete = document.querySelector('#category-delete')
 
 const backroundColorsPanel = document.querySelector('.backround-and-colors-panel')
 const bgAddInput = document.querySelector('#bg-add-input')
@@ -83,10 +85,10 @@ function notifyMe(text) {
 // =========================== local ===========================
 let categoryList = localStorage.getItem('categoryList')
 	? JSON.parse(localStorage.getItem('categoryList'))
-	: ['Zakupy', 'Praca', 'Inne']
+	: ['-wybierz kategorię-', 'Zakupy', 'Praca', 'Inne']
 let categoryColorList = localStorage.getItem('categoryColorList')
 	? JSON.parse(localStorage.getItem('categoryColorList'))
-	: []
+	: [null, '#48FF00', '#FFF300', '#00AAFF']
 let categoryNoteList = localStorage.getItem('category') ? JSON.parse(localStorage.getItem('category')) : []
 let textNoteList = localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')) : []
 let colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
@@ -111,7 +113,7 @@ const createLocalNote = () => {
 			</div>
 		`
 		noteArea.append(newNote)
-		newNote.style.backgroundColor = colorNoteList[i]
+		newNote.style.backgroundColor = categoryColorList[i]
 	}
 }
 
@@ -233,13 +235,28 @@ const checkCategory = () => {
 
 	console.log(categoryList)
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
-
+	category.textContent = ''
+	categoryToDelete.textContent = ''
 	categoryList.forEach(el => {
 		const option = document.createElement('option')
-		option.value = 1
 		option.textContent = el
 
-		category.appendChild(option)
+		if (option.textContent === '-wybierz kategorię-') {
+			option.value = 0
+			option.disabled = true
+			option.selected = true
+		}
+		else {
+			option.value = 1
+			// if(categoryToDelete === ''){
+			// 	optionDelete.innerHTML = '<option> Nie masz żadnych kategori, dodaj je </option>'
+
+			// }
+		}
+		const optionDelete = document.createElement('option')
+		optionDelete.textContent = el
+		categoryToDelete.append(optionDelete)
+		category.append(option)
 	})
 }
 
@@ -269,7 +286,27 @@ const addCategory = () => {
 		categoryError.style.display = 'none'
 		categoryError.textContent = ''
 		createCategory(nameCategory, colorCategory)
+		// closeCategoryPanel()
 	}
+}
+
+const deleteCategory = e => {
+	// console.log(e.target)
+	// console.log(categoryToDelete.selectedIndex)
+	const selectedValue = categoryToDelete.selectedIndex
+	console.log(selectedValue)
+
+	if (selectedValue != -1) {
+		categoryList.splice(selectedValue + 1, 1)
+		categoryColorList.splice(selectedValue + 1, 1)
+	}
+
+	localStorage.setItem('categoryList', JSON.stringify(categoryList))
+	localStorage.setItem('categoryColorList', JSON.stringify(categoryColorList))
+
+
+	checkCategory()
+
 }
 
 // background and colors
@@ -387,20 +424,10 @@ const selectValue = () => {
 }
 
 const checkColor = note => {
-	switch (selectedValue) {
-		case 'Zakupy':
-			note.style.backgroundColor = 'rgb(72,255,0)'
-			colorNoteList.push('rgb(72,255,0)')
-			break
-		case 'Praca':
-			note.style.backgroundColor = 'rgb(255,243,0)'
-			colorNoteList.push('rgb(255,243,0)')
-			break
-		case 'Inne':
-			note.style.backgroundColor = 'rgb(0,170,255)'
-			colorNoteList.push('rgb(0,170,255)')
-			break
-	}
+	
+	const index = categoryList.indexOf(selectedValue)
+	note.style.backgroundColor = categoryColorList[index]
+
 }
 
 const activateDeleteListeners = e => {
@@ -449,6 +476,7 @@ cancelBtn.addEventListener('click', closePanel)
 categoryBtn.addEventListener('click', addCategory)
 settingsBtnAll.forEach(btn => btn.addEventListener('click', openSettings))
 openCategoryPanelBtn.addEventListener('click', openCategoryPanel)
+categoryDeleteBtn.addEventListener('click', deleteCategory)
 
 openBackroundColorsPanelBtn.addEventListener('click', openBackroundColorsPanel)
 colorAddBtn.addEventListener('click', addColors)
