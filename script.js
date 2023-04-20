@@ -92,11 +92,6 @@ let categoryColorList = localStorage.getItem('categoryColorList')
 let categoryNoteList = localStorage.getItem('category') ? JSON.parse(localStorage.getItem('category')) : []
 let textNoteList = localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')) : []
 let backroundImage = localStorage.getItem('backroundImage') ? localStorage.getItem('backroundImage') : ''
-// let colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
-
-// const crateLocalCategoryList = () => {
-
-// }
 
 const createLocalNote = () => {
 	for (let i = 0; i < categoryNoteList.length; i++) {
@@ -114,7 +109,7 @@ const createLocalNote = () => {
 			</div>
 		`
 		noteArea.append(newNote)
-		newNote.style.backgroundColor = categoryColorList[i+1]
+		newNote.style.backgroundColor = categoryColorList[i + 1]
 	}
 }
 
@@ -165,8 +160,6 @@ const clearValuePanelCategory = () => {
 
 const clearValuePanelBackroundColorsPanel = () => {
 	bgAddInput.value = ''
-	// colorAddInput1.value = root.style.getPropertyValue('--main-color')
-	// colorAddInput2.value = root.style.getPropertyValue('--second-color')
 }
 
 // close panels
@@ -179,14 +172,6 @@ const closePanels = e => {
 	} else if (panel.matches('.backround-and-colors-panel')) {
 		closeBackroundColorsPanel()
 	}
-
-	// panel.classList.remove('panel-show')
-	// panel.classList.add('panel-hide')
-	// setTimeout(() => {
-	// 	panel.style.display = 'none'
-	// 	// error.style.visibility = 'hidden'
-	// 	// clearValuePanel()
-	// }, 500)
 }
 
 // settings
@@ -203,8 +188,6 @@ const closeSettings = () => {
 	settingsPanel.classList.add('panel-hide')
 	setTimeout(() => {
 		settingsPanel.style.display = 'none'
-		// error.style.visibility = 'hidden'
-		// clearValuePanel()
 	}, 450)
 }
 
@@ -223,17 +206,10 @@ const closeCategoryPanel = () => {
 	setTimeout(() => {
 		categoryPanel.style.display = 'none'
 		clearValuePanelCategory()
-		// error.style.visibility = 'hidden'
-		// clearValuePanel()
 	}, 500)
 }
 
-// const pushCategory = () => {
-
-// }
-
 const checkCategory = () => {
-
 	console.log(categoryList)
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
 	category.textContent = ''
@@ -251,13 +227,8 @@ const checkCategory = () => {
 			optionDelete.disabled = true
 			option.selected = true
 			optionDelete.selected = true
-		}
-		else {
+		} else {
 			option.value = 1
-			// if(categoryToDelete === ''){
-			// 	optionDelete.innerHTML = '<option> Nie masz żadnych kategori, dodaj je </option>'
-
-			// }
 		}
 		categoryToDelete.append(optionDelete)
 		category.append(option)
@@ -282,35 +253,26 @@ const addCategory = () => {
 	if (nameCategory === '') {
 		categoryError.style.display = 'block'
 		categoryError.textContent = 'Podaj nazwę kategorii'
-	}
-	// else if (){
-	// local storage
-	// }
-	else {
+	} else {
 		categoryError.style.display = 'none'
 		categoryError.textContent = ''
 		createCategory(nameCategory, colorCategory)
-		// closeCategoryPanel()
 	}
 }
 
 const deleteCategory = e => {
-	// console.log(e.target)
-	// console.log(categoryToDelete.selectedIndex)
 	const selectedValue = categoryToDelete.selectedIndex
 	console.log(selectedValue)
 
 	if (selectedValue != 0) {
-		categoryList.splice(selectedValue , 1)
-		categoryColorList.splice(selectedValue , 1)
+		categoryList.splice(selectedValue, 1)
+		categoryColorList.splice(selectedValue, 1)
 	}
 
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
 	localStorage.setItem('categoryColorList', JSON.stringify(categoryColorList))
 
-
 	checkCategory()
-
 }
 
 // background and colors
@@ -328,8 +290,6 @@ const closeBackroundColorsPanel = () => {
 	setTimeout(() => {
 		backroundColorsPanel.style.display = 'none'
 		clearValuePanelBackroundColorsPanel()
-		// error.style.visibility = 'hidden'
-		// clearValuePanel()
 	}, 500)
 }
 
@@ -337,7 +297,6 @@ const changeBackground = () => {
 	document.body.style.backgroundImage = `url('${bgAddInput.value}')`
 	localStorage.setItem('backgroundImage', bgAddInput.value)
 	bgAddInput.value = ''
-
 }
 
 const addColors = () => {
@@ -432,9 +391,8 @@ const selectValue = () => {
 
 const checkColor = note => {
 	const index = categoryList.indexOf(selectedValue)
-	console.log(index);
+	console.log(index)
 	note.style.backgroundColor = categoryColorList[index]
-
 }
 
 const activateDeleteListeners = e => {
@@ -476,18 +434,19 @@ const deleteAllNotes = () => {
 const allClosePanel = document.querySelectorAll('.close-settings')
 allClosePanel.forEach(btn => btn.addEventListener('click', closePanels))
 const allReturnBtn = document.querySelectorAll('.return-btn')
-allReturnBtn.forEach(btn => btn.addEventListener('click', () => {
-	closeCategoryPanel()
-	closeBackroundColorsPanel()
-	openSettings()
-}))
+allReturnBtn.forEach(btn =>
+	btn.addEventListener('click', () => {
+		closeCategoryPanel()
+		closeBackroundColorsPanel()
+		openSettings()
+	})
+)
 
 window.addEventListener('DOMContentLoaded', createLocalNote)
 window.addEventListener('DOMContentLoaded', () => {
 	checkCategory()
 	const img = localStorage.getItem('backgroundImage')
-	document.body.style.backgroundImage =` url('${img}')` 
-
+	document.body.style.backgroundImage = ` url('${img}')`
 })
 addBtn.addEventListener('click', openPanel)
 cancelBtn.addEventListener('click', closePanel)
@@ -500,7 +459,7 @@ categoryDeleteBtn.addEventListener('click', deleteCategory)
 openBackroundColorsPanelBtn.addEventListener('click', openBackroundColorsPanel)
 colorAddBtn.addEventListener('click', addColors)
 colorResetBtn.addEventListener('click', resetColors)
-// settingsBtn.addEventListener('click', openSettings)
+
 closePanelBtn.addEventListener('click', closeSettings)
 saveBtn.addEventListener('click', addNote)
 deleteAllBtn.addEventListener('click', deleteAllNotes)
