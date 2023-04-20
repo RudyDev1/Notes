@@ -431,7 +431,10 @@ const deleteAllNotes = () => {
 	categoryNoteList = []
 	textNoteList = []
 	colorNoteList = []
-	localStorage.clear()
+
+	localStorage.setItem('category', JSON.stringify(categoryNoteList))
+	localStorage.setItem('text', JSON.stringify(textNoteList))
+	localStorage.setItem('color', JSON.stringify(colorNoteList))
 }
 
 // =========================== listeners ===========================
