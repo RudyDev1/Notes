@@ -171,11 +171,28 @@ h2{
 	margin-bottom: 0;
 }
 
+
+.return-btn {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background: none;
+	padding: 10px;
+	background: none;
+	border: none;
+	border-radius: 5px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.return-btn .fa-arrow-left {
+	font-size: 30px;
+}
+
 .close-settings {
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	cursor: pointer;
 	background: none;
 	padding: 10px;
 	background: none;
@@ -236,6 +253,16 @@ select {
 }
 
 .category-box:first-of-type {
+	margin-bottom: 20px;
+}
+
+#category-delete{
+	width: auto;
+	min-width: auto;
+	margin-bottom: 0;
+}
+
+.category-btn{
 	margin-bottom: 20px;
 }
 

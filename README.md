@@ -29,8 +29,8 @@ The design is made based on the course, but I added Local Storage and improved t
 - [x] fixed view in mobile
 - [x] Create local storage
 - [x] Add the ability to enter your own categories
-- [ ] Add the ability to choose your own note color (in progres)
-- [ ] Add the ability to edite a note
+- [x] Add the ability to choose your own note color 
+- [ ] Add the ability to edite a note (in progres)
 - [x] Add the ability to set the time we have to take a note
 - [x] Add the ability to set a notification when time is running out to take a note
 - [x] Add the ability to add your own background

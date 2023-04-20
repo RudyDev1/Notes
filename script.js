@@ -91,7 +91,8 @@ let categoryColorList = localStorage.getItem('categoryColorList')
 	: [null, '#48FF00', '#FFF300', '#00AAFF']
 let categoryNoteList = localStorage.getItem('category') ? JSON.parse(localStorage.getItem('category')) : []
 let textNoteList = localStorage.getItem('text') ? JSON.parse(localStorage.getItem('text')) : []
-let colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
+let backroundImage = localStorage.getItem('backroundImage') ? localStorage.getItem('backroundImage') : ''
+// let colorNoteList = localStorage.getItem('color') ? JSON.parse(localStorage.getItem('color')) : []
 
 // const crateLocalCategoryList = () => {
 
@@ -113,7 +114,7 @@ const createLocalNote = () => {
 			</div>
 		`
 		noteArea.append(newNote)
-		newNote.style.backgroundColor = categoryColorList[i]
+		newNote.style.backgroundColor = categoryColorList[i+1]
 	}
 }
 
@@ -141,7 +142,7 @@ const closePanel = () => {
 		notePanel.style.display = 'none'
 		error.style.visibility = 'hidden'
 		clearValuePanel()
-	}, 500)
+	}, 450)
 }
 
 const addNote = () => {
@@ -204,7 +205,7 @@ const closeSettings = () => {
 		settingsPanel.style.display = 'none'
 		// error.style.visibility = 'hidden'
 		// clearValuePanel()
-	}, 500)
+	}, 450)
 }
 
 //category
@@ -239,12 +240,17 @@ const checkCategory = () => {
 	categoryToDelete.textContent = ''
 	categoryList.forEach(el => {
 		const option = document.createElement('option')
+		const optionDelete = document.createElement('option')
 		option.textContent = el
+		optionDelete.textContent = el
 
 		if (option.textContent === '-wybierz kategorię-') {
 			option.value = 0
+			optionDelete.value = 0
 			option.disabled = true
+			optionDelete.disabled = true
 			option.selected = true
+			optionDelete.selected = true
 		}
 		else {
 			option.value = 1
@@ -253,8 +259,6 @@ const checkCategory = () => {
 
 			// }
 		}
-		const optionDelete = document.createElement('option')
-		optionDelete.textContent = el
 		categoryToDelete.append(optionDelete)
 		category.append(option)
 	})
@@ -267,7 +271,7 @@ const createCategory = (name, color) => {
 
 	console.log(categoryList)
 	console.log(categoryColorList)
-
+	localStorage.setItem('categoryColorList', JSON.stringify(categoryColorList))
 	checkCategory()
 }
 
@@ -296,9 +300,9 @@ const deleteCategory = e => {
 	const selectedValue = categoryToDelete.selectedIndex
 	console.log(selectedValue)
 
-	if (selectedValue != -1) {
-		categoryList.splice(selectedValue + 1, 1)
-		categoryColorList.splice(selectedValue + 1, 1)
+	if (selectedValue != 0) {
+		categoryList.splice(selectedValue , 1)
+		categoryColorList.splice(selectedValue , 1)
 	}
 
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
@@ -331,7 +335,9 @@ const closeBackroundColorsPanel = () => {
 
 const changeBackground = () => {
 	document.body.style.backgroundImage = `url('${bgAddInput.value}')`
+	localStorage.setItem('backgroundImage', bgAddInput.value)
 	bgAddInput.value = ''
+
 }
 
 const addColors = () => {
@@ -417,7 +423,7 @@ const createNote = () => {
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(colorNoteList))
+	localStorage.setItem('color', JSON.stringify(categoryColorList))
 }
 
 const selectValue = () => {
@@ -425,8 +431,8 @@ const selectValue = () => {
 }
 
 const checkColor = note => {
-	
 	const index = categoryList.indexOf(selectedValue)
+	console.log(index);
 	note.style.backgroundColor = categoryColorList[index]
 
 }
@@ -447,30 +453,42 @@ const activateDeleteListeners = e => {
 const deleteNote = i => {
 	categoryNoteList.splice(i, 1)
 	textNoteList.splice(i, 1)
-	colorNoteList.splice(i, 1)
+	categoryColorList.splice(i, 1)
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(colorNoteList))
+	localStorage.setItem('color', JSON.stringify(categoryColorList))
 }
 
 const deleteAllNotes = () => {
 	noteArea.textContent = ''
 	categoryNoteList = []
 	textNoteList = []
-	colorNoteList = []
+	categoryColorList = []
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(colorNoteList))
+	localStorage.setItem('color', JSON.stringify(categoryColorList))
 }
 
 // =========================== listeners ===========================
 
 const allClosePanel = document.querySelectorAll('.close-settings')
 allClosePanel.forEach(btn => btn.addEventListener('click', closePanels))
+const allReturnBtn = document.querySelectorAll('.return-btn')
+allReturnBtn.forEach(btn => btn.addEventListener('click', () => {
+	closeCategoryPanel()
+	closeBackroundColorsPanel()
+	openSettings()
+}))
 
 window.addEventListener('DOMContentLoaded', createLocalNote)
+window.addEventListener('DOMContentLoaded', () => {
+	checkCategory()
+	const img = localStorage.getItem('backgroundImage')
+	document.body.style.backgroundImage =` url('${img}')` 
+
+})
 addBtn.addEventListener('click', openPanel)
 cancelBtn.addEventListener('click', closePanel)
 
@@ -489,5 +507,3 @@ deleteAllBtn.addEventListener('click', deleteAllNotes)
 noteArea.addEventListener('click', activateDeleteListeners)
 
 bgAddBtn.addEventListener('click', changeBackground)
-
-checkCategory()
