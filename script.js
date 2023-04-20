@@ -381,8 +381,9 @@ const getTime = textarea => {
 		}, endTime)
 	} else if (endTime === NaN) {
 		outputTime = ''
+		console.error()
 	} else {
-		console.warn('Nie podano godziny')
+		outputTime = ''
 	}
 }
 
