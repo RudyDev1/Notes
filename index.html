@@ -9,7 +9,8 @@
     <meta name="description" content="Dodawaj i zapisuj swoje notatki. Skorzystaj z darmowej strony już dziś!">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@400;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@200;400;600;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/58309639ce.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
@@ -32,14 +33,11 @@
 
     </div>
 
-    <div class="note-panel">
+    <div class="note-panel panel">
         <h2>Dodaj notatke</h2>
         <label for="category">Wybierz kategorię: <span>*</span></label>
         <select id="category">
             <option value="0" disabled selected>-wybierz kategorię-</option>
-            <option value="1">Zakupy</option>
-            <option value="1">Praca</option>
-            <option value="1">Inne</option>
         </select>
 
         <label for="text">Wpisz treść notatki: <span>*</span></label>
@@ -49,10 +47,84 @@
 
         <p class="error">Uzupełnij wszystkie pola!</p>
         <div class="panel-buttons">
-            <button class="save icon"><i class="fas fa-save"></i> Zapisz</button>
-            <button class="cancel icon"><i class="far fa-window-close"></i> Anuluj</button>
+            <button class="save icon panel-button"><i class="fas fa-save"></i> Zapisz</button>
+            <button class="cancel icon panel-button"><i class="far fa-window-close"></i> Anuluj</button>
         </div>
     </div>
+
+    <!-- settings -->
+
+    <div class="settings-panel panel">
+        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+
+        <h2>Ustawienia</h2>
+
+        <h3>Tworzenie kategorii</h3>
+        <button class="category-open-panel-btn panel-button"><i class="fa-solid fa-plus"></i> Zarządzaj
+            kategoriami</button>
+
+        <h3>Kolory i tło</h3>
+        <button class="colors-open-panel-btn panel-button"><i class="fa-solid fa-palette"></i> Zarządzaj kolorami i tłem
+            strony</button>
+
+        <p class="info">Wersja Beta, mogą występować błędy!</p>
+    </div>
+
+
+    <div class="category-panel panel">
+        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+        <h3>Tworzenie kategorii</h3>
+        <div class="category-box">
+            <label for="category-add">Wpisz nazwę nowej kategorii: </label>
+            <input type="text" id="category-add" placeholder="Nazwa kategorii">
+        </div>
+
+        <div class="category-box">
+            <label for="category-add">Wybierz kolor nowej kategorii: </label>
+            <input type="color" id="category-color-add" value="#fff300">
+        </div>
+
+        <p class="error-category">Ta kategoria już istnieje</p>
+        <button class="category-btn panel-button"><i class="fa-solid fa-plus "></i> Dodaj nową kategorię</button>
+    </div>
+
+    <div class="backround-and-colors-panel panel">
+        <button class="close-settings"><i class="fa-solid fa-xmark"></i></button>
+        <div class="backround">
+            <h3>Dodawanie tła</h3>
+            <input type="url" placeholder="https://example.com" size="30" id="bg-add-input">
+            <button class="bg-add-btn panel-button"><i class="fa-solid fa-image"></i> Ustaw swoje tło</button>
+        </div>
+
+        <div class="color">
+            <h3>Ustawianie koloru</h3>
+            <div class="color-container">
+                <div class="color-box">
+                    <label for="color1">Kolor główny:</label>
+                    <input type="color" id="color1" value="#000000">
+                    <small style="visibility: hidden;">w % podaj przezroczystość koloru</small>
+                </div>
+
+                <div class="color-box">
+                    <label for="color2">Kolor drugi:</label>
+                    <div>
+                        <input type="color" id="color2" value="#ffffff">
+                        <input type="number" id="opacity" min="0" max="100" value="100" title="Przezroczystość koloru">%
+                    </div>
+                    <small>w % podaj przezroczystość koloru</small>
+                </div>
+            </div>
+            <div>
+                <button class="c-add-btn panel-button"><i class="fa-solid fa-palette"></i> Ustaw kolory strony</button>
+                <button class="c-reset-btn panel-button"><i class="fa-solid fa-arrow-rotate-left"></i> Reset
+                    kolorów</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- <p class="error-settings">Uzupełnij wszystkie pola!</p>-->
 
     <script src="script.js"></script>
 </body>
