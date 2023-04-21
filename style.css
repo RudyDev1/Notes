@@ -20,6 +20,42 @@ body {
 	overflow: overlay;
 }
 
+.box-alert{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: fixed;
+	bottom: -100px;
+	width: 100vw;
+	height: 80px;
+	background-color: #056728;
+	color: #fff;
+	text-align: center;
+	animation: fade 1 .5s linear forwards;
+}
+
+@keyframes fade {
+	from{
+		bottom: -100px;
+	}
+	to{
+		bottom: 0;
+	}
+}
+
+.progres{
+	position: absolute;
+	height: 10px;
+	left: 0;
+	width: 0;
+	bottom: 0px;
+	background-image: linear-gradient(to right,#2db40f, #16af2d);
+	animation: progres 1 3s .7s linear forwards;
+	transform-origin: left;
+}
+
+
+
 .info {
 	color: red;
 	font-size: 20px;
@@ -335,6 +371,16 @@ select {
 
 	to {
 		opacity: 0;
+	}
+}
+
+@keyframes progres {
+	from{
+		width: 0;
+	}
+
+	to{
+		width: 100%;
 	}
 }
 
