@@ -36,6 +36,10 @@ const mainColor = getComputedStyle(root).getPropertyValue('--main-color')
 const secondColor = getComputedStyle(root).getPropertyValue('--second-color')
 const colorResetBtn = document.querySelector('.c-reset-btn')
 
+const editPanel = document.querySelector('.edit-panel')
+const editNoteBtn = document.querySelector('.note-edit')
+const editNoteTexarea = document.querySelector('#text-edit')
+
 const timeInput = document.querySelector('#time')
 let outputTime = ''
 
@@ -64,19 +68,25 @@ const createLocalNote = () => {
 		newNote.classList.add('note')
 		newNote.innerHTML = `
 		<div class="note-header">
-		<h3 class="note-title">${categoryNoteList[i]}</h3>
-		<button class="delete-note">
-		<i class="fas fa-times icon"></i>
-		</button>
+			<h3 class="note-title">${categoryNoteList[i]}</h3>
+			<div class="note-buttons"> 
+				<button class="edit-note">
+					<i class="fa-solid fa-pen"></i>
+				</button>
+				<button class="delete-note">
+					<i class="fas fa-times icon"></i>
+				</button>
 			</div>
-			<div class="note-body">
+		</div>
+		<div class="note-body">
 			${textNoteList[i]}
-			</div>
+		</div>
 			`
 		noteArea.append(newNote)
 
 		const index = categoryList.indexOf(categoryNoteList[i])
 		newNote.style.backgroundColor = categoryColorList[index]
+		activateEditNoteListeners()
 	}
 }
 
@@ -86,13 +96,11 @@ const showAlertBox = info => {
 	alertBox.style.display = 'flex'
 	spanAlertBox.style.display = 'flex'
 
-	if(info === 'category'){
+	if (info === 'category') {
 		alertBox.style.backgroundColor = '#056728'
 		pAlertBox.textContent = 'Pomyślnie dodano kategorię!'
 		spanAlertBox.style.backgroundImage = 'linear-gradient(to right, #2db40f, #16af2d)'
-		
-	}
-	else if(info === 'deleteCategory'){
+	} else if (info === 'deleteCategory') {
 		alertBox.style.backgroundColor = '#791010'
 		pAlertBox.textContent = 'Usunięto kategorię!'
 		spanAlertBox.style.backgroundImage = 'linear-gradient(to right, #b40f0f, #b31b1b)'
@@ -101,7 +109,7 @@ const showAlertBox = info => {
 	setTimeout(() => {
 		alertBox.style.display = 'none'
 		spanAlertBox.style.display = 'none'
-	}, 3800);
+	}, 3800)
 }
 
 // ===========================  panels  ===========================
@@ -116,6 +124,7 @@ const openPanel = () => {
 	closeSettings()
 	closeCategoryPanel()
 	closeBackroundColorsPanel()
+	closeEditNotePanel()
 	notePanel.style.display = 'flex'
 	notePanel.classList.remove('panel-hide')
 	notePanel.classList.add('panel-show')
@@ -162,6 +171,8 @@ const closePanels = e => {
 		closeCategoryPanel()
 	} else if (panel.matches('.backround-and-colors-panel')) {
 		closeBackroundColorsPanel()
+	} else if (panel.matches('.edit-panel')) {
+		closeEditNotePanel()
 	}
 }
 
@@ -169,6 +180,7 @@ const closePanels = e => {
 
 const openSettings = () => {
 	closePanel()
+	closeEditNotePanel()
 	settingsPanel.style.display = 'flex'
 	settingsPanel.classList.remove('panel-hide')
 	settingsPanel.classList.add('panel-show')
@@ -186,6 +198,7 @@ const closeSettings = () => {
 
 const openCategoryPanel = () => {
 	closeSettings()
+	closeEditNotePanel()
 	categoryPanel.style.display = 'flex'
 	categoryPanel.classList.remove('panel-hide')
 	categoryPanel.classList.add('panel-show')
@@ -305,6 +318,42 @@ const resetColors = () => {
 	colorAddInput2.value = '#ffffff'
 	opacityColorAddInput.value = 100
 }
+
+//edit note
+
+const activateEditNoteListeners = (e) => {
+	const editBtnAll = document.querySelectorAll('.edit-note')
+	editBtnAll.forEach(btn => btn.addEventListener('click', openEditNotePanel))
+}
+
+const createEditedNote = (e) => {
+	
+}
+
+const openEditNotePanel = (e) => {
+	const note = e.target.closest('.note')
+	closePanel()
+	closeCategoryPanel()
+	closeBackroundColorsPanel()
+	closeSettings()
+	editPanel.style.display = 'flex'
+	editPanel.classList.remove('panel-hide')
+	editPanel.classList.add('panel-show')
+	editNoteBtn.addEventListener('click', () => {
+		note.querySelector('.note-body').textContent = editNoteTexarea.value
+		
+	})
+}
+
+const closeEditNotePanel = () => {
+	editPanel.classList.remove('panel-show')
+	editPanel.classList.add('panel-hide')
+	setTimeout(() => {
+		editPanel.style.display = 'none'
+		editNoteTexarea.value = ''
+	}, 500)
+}
+
 // =========================== get Time and show Notification ===========================
 
 const getTime = textarea => {
@@ -350,14 +399,19 @@ const createNote = () => {
 	newNote.classList.add('note')
 	newNote.innerHTML = `
 	<div class="note-header">
-	<h3 class="note-title">${selectedValue}</h3>
-	${outputTime}
-	<button class="delete-note">
-	<i class="fas fa-times icon"></i>
-	</button>
+		<h3 class="note-title">${selectedValue}</h3>
+		${outputTime}
+		<div class="note-buttons"> 
+			<button class="edit-note">
+				<i class="fa-solid fa-pen"></i>
+			</button>
+			<button class="delete-note">
+				<i class="fas fa-times icon"></i>
+			</button>
+		</div>
 	</div>
 	<div class="note-body">
-	${textarea.value}
+		${textarea.value}
 	</div> 
     `
 	noteArea.append(newNote)
@@ -371,6 +425,7 @@ const createNote = () => {
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
+	activateEditNoteListeners()
 }
 
 const selectValue = () => {
@@ -487,3 +542,4 @@ deleteAllBtn.addEventListener('click', deleteAllNotes)
 noteArea.addEventListener('click', activateDeleteListeners)
 
 bgAddBtn.addEventListener('click', changeBackground)
+

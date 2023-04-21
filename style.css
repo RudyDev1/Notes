@@ -130,15 +130,26 @@ h2 {
 	background-color: rgba(0, 0, 0, 0.06);
 }
 
-.note-header .delete-note {
+.note-header .delete-note,
+.edit-note  {
 	background: none;
 	font-size: 20px;
 	border: none;
 	cursor: pointer;
 }
+.edit-note{
+	font-size: 14px;
+	margin-right: 10px;
+
+}
+.note-buttons{
+	display: flex;
+	align-items: center;
+}
 
 .note-body {
 	/* blocking leaked letters outside  */
+	position: relative;
 	overflow-wrap: break-word;
 	padding: 20px 15px;
 	font-size: 14px;
@@ -239,12 +250,13 @@ h2 {
 	color: crimson;
 }
 
-.panel #text {
+.panel #text, .panel #text-edit {
 	height: 100px;
 }
 
 .panel #text,
 .panel #category,
+.panel #text-edit,
 select {
 	margin-bottom: 20px;
 	padding: 10px 20px;
@@ -342,6 +354,12 @@ select {
 	visibility: hidden;
 }
 
+.edit-panel{
+	display: none;
+}
+
+
+
 @keyframes show-panel {
 	from {
 		opacity: 0;
@@ -380,7 +398,6 @@ select {
 		bottom: 0;
 	}
 }
-
 
 @media (max-width: 576px) {
 	.menu {
