@@ -20,8 +20,8 @@ body {
 	overflow: overlay;
 }
 
-.box-alert{
-	display: flex;
+.box-alert {
+	display: none;
 	align-items: center;
 	justify-content: center;
 	position: fixed;
@@ -31,30 +31,18 @@ body {
 	background-color: #056728;
 	color: #fff;
 	text-align: center;
-	animation: fade 1 .5s linear forwards;
+	animation: fade 1 0.5s linear forwards;
 }
 
-@keyframes fade {
-	from{
-		bottom: -100px;
-	}
-	to{
-		bottom: 0;
-	}
-}
-
-.progres{
+.progres {
 	position: absolute;
 	height: 10px;
 	left: 0;
 	width: 0;
 	bottom: 0px;
-	background-image: linear-gradient(to right,#2db40f, #16af2d);
-	animation: progres 1 3s .7s linear forwards;
+	animation: progres 1 3s 0.7s linear forwards;
 	transform-origin: left;
 }
-
-
 
 .info {
 	color: red;
@@ -375,14 +363,24 @@ select {
 }
 
 @keyframes progres {
-	from{
+	from {
 		width: 0;
 	}
 
-	to{
+	to {
 		width: 100%;
 	}
 }
+
+@keyframes fade {
+	from {
+		bottom: -100px;
+	}
+	to {
+		bottom: 0;
+	}
+}
+
 
 @media (max-width: 576px) {
 	.menu {

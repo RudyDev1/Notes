@@ -43,44 +43,9 @@ const error = document.querySelector('.error')
 
 let selectedValue
 
-const bg = document.querySelector('.bg')
-
-// =========================== notification ===========================
-
-Notification.requestPermission()
-
-function notifyMe(text) {
-	if (!('Notification' in window)) {
-		// Check if the browser supports notifications
-		alert('This browser does not support desktop notification')
-	} else if (Notification.permission === 'granted') {
-		// Check whether notification permissions have already been granted;
-		console.log(text)
-		const options = {
-			body: text,
-			// icon: theIcon,
-		}
-
-		const notification = new Notification(selectedValue, options)
-		notification.onclick = e => {
-			e.preventDefault() // prevent the browser from focusing the Notification's tab
-			window.open('https://notes-rudydev.netlify.app/', '_blank')
-		}
-	} else if (Notification.permission !== 'denied') {
-		// We need to ask the user for permission
-		Notification.requestPermission().then(permission => {
-			// If the user accepts, let's create a notification
-			if (permission === 'granted') {
-				const notification = new Notification(selectedValue, options)
-
-				notification.onclick = e => {
-					e.preventDefault()
-					window.open('https://notes-rudydev.netlify.app/', '_blank')
-				}
-			}
-		})
-	}
-}
+const alertBox = document.querySelector('.box-alert')
+const pAlertBox = document.querySelector('.box-alert p')
+const spanAlertBox = document.querySelector('.box-alert span')
 
 // =========================== local ===========================
 let categoryList = localStorage.getItem('categoryList')
@@ -98,19 +63,45 @@ const createLocalNote = () => {
 		const newNote = document.createElement('div')
 		newNote.classList.add('note')
 		newNote.innerHTML = `
-			<div class="note-header">
-				<h3 class="note-title">${categoryNoteList[i]}</h3>
-				<button class="delete-note">
-					<i class="fas fa-times icon"></i>
-				</button>
+		<div class="note-header">
+		<h3 class="note-title">${categoryNoteList[i]}</h3>
+		<button class="delete-note">
+		<i class="fas fa-times icon"></i>
+		</button>
 			</div>
 			<div class="note-body">
-				${textNoteList[i]}
+			${textNoteList[i]}
 			</div>
-		`
+			`
 		noteArea.append(newNote)
-		newNote.style.backgroundColor = categoryColorList[i + 1]
+
+		const index = categoryList.indexOf(categoryNoteList[i])
+		newNote.style.backgroundColor = categoryColorList[index]
 	}
+}
+
+// =========================== alert box ===========================
+
+const showAlertBox = info => {
+	alertBox.style.display = 'flex'
+	spanAlertBox.style.display = 'flex'
+
+	if(info === 'category'){
+		alertBox.style.backgroundColor = '#056728'
+		pAlertBox.textContent = 'Pomyślnie dodano kategorię!'
+		spanAlertBox.style.backgroundImage = 'linear-gradient(to right, #2db40f, #16af2d)'
+		
+	}
+	else if(info === 'deleteCategory'){
+		alertBox.style.backgroundColor = '#791010'
+		pAlertBox.textContent = 'Usunięto kategorię!'
+		spanAlertBox.style.backgroundImage = 'linear-gradient(to right, #b40f0f, #b31b1b)'
+	}
+
+	setTimeout(() => {
+		alertBox.style.display = 'none'
+		spanAlertBox.style.display = 'none'
+	}, 3800);
 }
 
 // ===========================  panels  ===========================
@@ -210,7 +201,6 @@ const closeCategoryPanel = () => {
 }
 
 const checkCategory = () => {
-	console.log(categoryList)
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
 	category.textContent = ''
 	categoryToDelete.textContent = ''
@@ -240,8 +230,6 @@ const createCategory = (name, color) => {
 	categoryList.push(name)
 	categoryColorList.push(color)
 
-	console.log(categoryList)
-	console.log(categoryColorList)
 	localStorage.setItem('categoryColorList', JSON.stringify(categoryColorList))
 	checkCategory()
 }
@@ -257,16 +245,17 @@ const addCategory = () => {
 		categoryError.style.display = 'none'
 		categoryError.textContent = ''
 		createCategory(nameCategory, colorCategory)
+		showAlertBox('category')
 	}
 }
 
-const deleteCategory = e => {
+const deleteCategory = () => {
 	const selectedValue = categoryToDelete.selectedIndex
-	console.log(selectedValue)
 
 	if (selectedValue != 0) {
 		categoryList.splice(selectedValue, 1)
 		categoryColorList.splice(selectedValue, 1)
+		showAlertBox('deleteCategory')
 	}
 
 	localStorage.setItem('categoryList', JSON.stringify(categoryList))
@@ -360,16 +349,16 @@ const createNote = () => {
 	const newNote = document.createElement('div')
 	newNote.classList.add('note')
 	newNote.innerHTML = `
-        <div class="note-header">
-            <h3 class="note-title">${selectedValue}</h3>
-			${outputTime}
-            <button class="delete-note">
-                <i class="fas fa-times icon"></i>
-            </button>
-        </div>
-        <div class="note-body">
-            ${textarea.value}
-        </div> 
+	<div class="note-header">
+	<h3 class="note-title">${selectedValue}</h3>
+	${outputTime}
+	<button class="delete-note">
+	<i class="fas fa-times icon"></i>
+	</button>
+	</div>
+	<div class="note-body">
+	${textarea.value}
+	</div> 
     `
 	noteArea.append(newNote)
 
@@ -382,7 +371,6 @@ const createNote = () => {
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(categoryColorList))
 }
 
 const selectValue = () => {
@@ -391,7 +379,6 @@ const selectValue = () => {
 
 const checkColor = note => {
 	const index = categoryList.indexOf(selectedValue)
-	console.log(index)
 	note.style.backgroundColor = categoryColorList[index]
 }
 
@@ -415,7 +402,6 @@ const deleteNote = i => {
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(categoryColorList))
 }
 
 const deleteAllNotes = () => {
@@ -426,7 +412,42 @@ const deleteAllNotes = () => {
 
 	localStorage.setItem('category', JSON.stringify(categoryNoteList))
 	localStorage.setItem('text', JSON.stringify(textNoteList))
-	localStorage.setItem('color', JSON.stringify(categoryColorList))
+}
+
+// =========================== notification ===========================
+
+Notification.requestPermission()
+
+function notifyMe(text) {
+	if (!('Notification' in window)) {
+		// Check if the browser supports notifications
+		alert('This browser does not support desktop notification')
+	} else if (Notification.permission === 'granted') {
+		// Check whether notification permissions have already been granted;
+		const options = {
+			body: text,
+			// icon: theIcon,
+		}
+
+		const notification = new Notification(selectedValue, options)
+		notification.onclick = e => {
+			e.preventDefault() // prevent the browser from focusing the Notification's tab
+			window.open('https://notes-rudydev.netlify.app/', '_blank')
+		}
+	} else if (Notification.permission !== 'denied') {
+		// We need to ask the user for permission
+		Notification.requestPermission().then(permission => {
+			// If the user accepts, let's create a notification
+			if (permission === 'granted') {
+				const notification = new Notification(selectedValue, options)
+
+				notification.onclick = e => {
+					e.preventDefault()
+					window.open('https://notes-rudydev.netlify.app/', '_blank')
+				}
+			}
+		})
+	}
 }
 
 // =========================== listeners ===========================
